@@ -14,7 +14,7 @@ const EmployeeList = ({ data, isLoading }) => {
           <CircularProgress />
         </div>
       ) : (
-        <div className="bg-white w-full max-w-[1330px] mx-auto border-[1px] border-solid border-other_grey rounded-[30px]">
+        <div className="bg-white py-6 w-full max-w-[1330px] mx-auto border-[1px] border-solid border-other_grey rounded-[30px]">
           <div className="tableHeader">
             <p className="tableHeaderText">Name</p>
             <p className="tableHeaderText">DOB</p>

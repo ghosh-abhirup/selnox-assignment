@@ -9,9 +9,17 @@ body {
 }
 
 .employeeCard {
-  @apply px-[87px] py-[45px] grid grid-cols-6;
+  @apply px-[87px] py-6 grid grid-cols-6;
 }
 
 .tableHeader {
-  @apply px-[87px] py-[45px] grid grid-cols-6 border-b-[1px] border-solid border-other_grey;
+  @apply px-[87px] py-6 grid grid-cols-6 border-b-[1px] border-solid border-other_grey;
+}
+
+.employeeCard:last-child {
+  border: none !important;
+}
+
+.formRow {
+  @apply flex items-center justify-between gap-[50px];
 }

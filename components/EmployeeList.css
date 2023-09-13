@@ -12,6 +12,7 @@
   font-weight: 500;
   line-height: 140%; /* 18.2px */
   letter-spacing: 0.13px;
+  margin: auto;
 }
 
 .employeeListHeading {

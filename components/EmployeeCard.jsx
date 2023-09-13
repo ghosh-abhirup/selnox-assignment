@@ -1,7 +1,7 @@
 "use client";
 import { ClickAwayListener } from "@mui/material";
 import "./EmployeeList.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEllipsisVertical,
@@ -9,9 +9,30 @@ import {
   faPen,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from "@/app/AppContext";
+import axios from "axios";
 
 const EmployeeCard = ({ employee }) => {
   const [clicked, setClicked] = useState(false);
+  const { fetchEmployeeData } = useContext(AppContext);
+
+  const handleDeleteEmployee = async () => {
+    try {
+      const { data } = await axios.delete(
+        `https://sweede.app/DeliveryBoy/delete-Employee/${employee.id}`
+      );
+
+      if (data.status === "success") {
+        fetchEmployeeData();
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 500) {
+        alert("Internal Server Error:", error);
+      } else {
+        alert("Request Error:", error);
+      }
+    }
+  };
 
   const handleClick = () => {
     setClicked((prev) => !prev);
@@ -51,7 +72,10 @@ const EmployeeCard = ({ employee }) => {
               <FontAwesomeIcon icon={faPen} size="sm" color="#7D7D7D" />
               <p className="popupText">Edit</p>
             </div>
-            <div className="cursor-pointer flex items-center gap-4 px-6 py-4">
+            <div
+              className="cursor-pointer flex items-center gap-4 px-6 py-4"
+              onClick={handleDeleteEmployee}
+            >
               <FontAwesomeIcon icon={faTrashCan} size="sm" color="#7D7D7D" />
               <p className="popupText">Delete</p>
             </div>
