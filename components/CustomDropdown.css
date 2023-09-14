@@ -1,0 +1,23 @@
+.dropdownInput {
+  width: 100%;
+  /* height: 56px; */
+
+  border-radius: 16px;
+  background: #f8fbff;
+  margin-top: 19px;
+}
+
+.dropdownText {
+  color: #7e98ba;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 18.2px */
+  letter-spacing: 0.13px;
+}
+
+.dropdownBox {
+  border-radius: 16px;
+  background-color: #f8fbff;
+  color: #7e98ba;
+}

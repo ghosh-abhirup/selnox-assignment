@@ -50,9 +50,7 @@ const EmployeeCard = ({ employee }) => {
       <p className="employeeCardText ">{employee.DOB}</p>
       <p className="employeeCardText ">{employee.StartDate}</p>
       <p className="employeeCardText ">{employee.EndDate}</p>
-      <p className="employeeCardText truncate col-span-2">
-        {employee.Description}
-      </p>
+      <p className="employeeCardText  col-span-2">{employee.Description}</p>
 
       <div
         className="absolute right-7 top-1/2 -translate-y-1/2 cursor-pointer"
