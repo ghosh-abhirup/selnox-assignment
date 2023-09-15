@@ -8,6 +8,15 @@ body {
   box-sizing: border-box;
 }
 
+.registerBtnText {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 25.2px */
+  letter-spacing: 0.18px;
+}
+
 .employeeCard {
   @apply px-[87px] py-6 grid grid-cols-6;
 }

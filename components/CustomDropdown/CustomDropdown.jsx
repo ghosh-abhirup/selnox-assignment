@@ -35,7 +35,11 @@ const CustomDropdown = ({ selectedOption, setSelectedOption }) => {
         color="#556E9A"
         width={10}
         height={14}
-        className={`${clicked ? "transition-all ease-in-out rotate-180" : ""}`}
+        className={`${
+          clicked
+            ? "transition-all ease-in-out rotate-180"
+            : "transition-all ease-in-out rotate-0"
+        }`}
       />
 
       {clicked ? (

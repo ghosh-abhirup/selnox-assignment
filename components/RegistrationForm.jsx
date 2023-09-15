@@ -1,23 +1,23 @@
 "use client";
 import React, { useContext, useState } from "react";
 import "./RegistrationPage.css";
-import CustomDropdown from "./CustomDropdown";
+import CustomDropdown from "./CustomDropdown/CustomDropdown";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { AppContext } from "@/app/AppContext";
 import { v4 as uuidv4 } from "uuid";
 
-const RegistrationForm = () => {
-  const router = useRouter();
+const RegistrationForm = ({ data, closeOnSubmit }) => {
   const { fetchEmployeeData } = useContext(AppContext);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [dob, setDob] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [currentSalary, setCurrentSalary] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [firstName, setFirstName] = useState(data ? data.FirstName : "");
+  const [lastName, setLastName] = useState(data ? data.LastName : "");
+  const [dob, setDob] = useState(data ? data.DOB : "");
+  const [startDate, setStartDate] = useState(data ? data.StartDate : "");
+  const [endDate, setEndDate] = useState(data ? data.EndDate : "");
+  const [currentSalary, setCurrentSalary] = useState(
+    data ? data.CurrentSalary : ""
+  );
+  const [selectedOption, setSelectedOption] = useState(data ? data.Study : "");
 
   const handleCancelForm = () => {
     setFirstName("");
@@ -49,7 +49,7 @@ const RegistrationForm = () => {
 
       if (data.status === "success") {
         fetchEmployeeData();
-        router.push("/");
+        closeOnSubmit();
       }
     } catch (error) {
       if (error.response && error.response.status === 500) {
@@ -73,7 +73,12 @@ const RegistrationForm = () => {
       alert("Please enter all the fields");
     }
 
-    addEmployee();
+    if (data) {
+      // update employee
+    } else {
+      console.log("hey look adding him/her");
+      addEmployee();
+    }
   };
 
   return (
