@@ -11,9 +11,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "@/app/AppContext";
 import axios from "axios";
+import EditDetailsPage from "../EditDetailsPage";
 
 const EmployeeCard = ({ employee }) => {
   const [clicked, setClicked] = useState(false);
+  const [openEditForm, setOpenEditForm] = useState(false);
   const { fetchEmployeeData } = useContext(AppContext);
 
   const handleDeleteEmployee = async () => {
@@ -66,7 +68,10 @@ const EmployeeCard = ({ employee }) => {
               <FontAwesomeIcon icon={faEye} size="sm" color="#7D7D7D" />
               <p className="popupText">View</p>
             </div>
-            <div className="cursor-pointer flex items-center gap-4 px-6 py-4">
+            <div
+              className="cursor-pointer flex items-center gap-4 px-6 py-4"
+              onClick={() => setOpenEditForm(true)}
+            >
               <FontAwesomeIcon icon={faPen} size="sm" color="#7D7D7D" />
               <p className="popupText">Edit</p>
             </div>
@@ -80,6 +85,12 @@ const EmployeeCard = ({ employee }) => {
           </div>
         </ClickAwayListener>
       ) : null}
+
+      <EditDetailsPage
+        open={openEditForm}
+        handleClose={() => setOpenEditForm(false)}
+        data={employee}
+      />
     </div>
   );
 };

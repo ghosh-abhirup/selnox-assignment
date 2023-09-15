@@ -60,6 +60,37 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
     }
   };
 
+  const editEmployeeData = async () => {
+    try {
+      const response = await axios.post(
+        ` https://sweede.app/DeliveryBoy/update-Employee/${data.id}`,
+        {
+          id: uuidv4(),
+          FirstName: firstName,
+          LastName: lastName,
+          DOB: dob,
+          Study: selectedOption,
+          StartDate: startDate,
+          EndDate: endDate,
+          CurrentSalary: currentSalary,
+          Description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto minus laborum hic ea omnis illum, corrupti molestiae vero blanditiis quidem!",
+        }
+      );
+
+      if (response.data.status === "success") {
+        fetchEmployeeData();
+        closeOnSubmit();
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 500) {
+        alert("Internal Server Error:", error);
+      } else {
+        console.log("Request Error:", error);
+      }
+    }
+  };
+
   const handleSubmit = () => {
     if (
       firstName == "" ||
@@ -75,6 +106,7 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
 
     if (data) {
       // update employee
+      editEmployeeData();
     } else {
       console.log("hey look adding him/her");
       addEmployee();
