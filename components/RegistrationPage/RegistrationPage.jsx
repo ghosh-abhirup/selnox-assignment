@@ -10,7 +10,7 @@ const RegistrationPage = ({ open, handleClose }) => {
   return (
     <div>
       <Dialog fullScreen open={open} onClose={handleClose}>
-        <div className="bg-white w-full h-full">
+        <div className="bg-white w-full h-full ">
           <FontAwesomeIcon
             icon={faXmark}
             size="2xl"

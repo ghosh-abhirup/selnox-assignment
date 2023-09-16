@@ -5,8 +5,16 @@ import CustomDropdown from "./CustomDropdown/CustomDropdown";
 import axios from "axios";
 import { AppContext } from "@/app/AppContext";
 import { v4 as uuidv4 } from "uuid";
+import dynamic from "next/dynamic";
 
-const RegistrationForm = ({ data, closeOnSubmit }) => {
+const CustomRichText = dynamic(
+  () => import("./CustomRichText/CustomRichText"),
+  {
+    ssr: false,
+  }
+);
+
+const RegistrationForm = ({ data, closeOnSubmit, isViewDetails }) => {
   const { fetchEmployeeData } = useContext(AppContext);
 
   const [firstName, setFirstName] = useState(data ? data.FirstName : "");
@@ -18,6 +26,7 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
     data ? data.CurrentSalary : ""
   );
   const [selectedOption, setSelectedOption] = useState(data ? data.Study : "");
+  const [desc, setDesc] = useState(data ? data.Description : "");
 
   const handleCancelForm = () => {
     setFirstName("");
@@ -27,6 +36,7 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
     setEndDate("");
     setCurrentSalary("");
     setSelectedOption("");
+    setDesc("");
   };
 
   const addEmployee = async () => {
@@ -42,8 +52,7 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
           StartDate: startDate,
           EndDate: endDate,
           CurrentSalary: currentSalary,
-          Description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto minus laborum hic ea omnis illum, corrupti molestiae vero blanditiis quidem!",
+          Description: desc,
         }
       );
 
@@ -73,8 +82,7 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
           StartDate: startDate,
           EndDate: endDate,
           CurrentSalary: currentSalary,
-          Description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto minus laborum hic ea omnis illum, corrupti molestiae vero blanditiis quidem!",
+          Description: desc,
         }
       );
 
@@ -99,7 +107,8 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
       startDate == "" ||
       endDate == "" ||
       currentSalary == "" ||
-      selectedOption == ""
+      selectedOption == "" ||
+      desc == ""
     ) {
       alert("Please enter all the fields");
     }
@@ -114,7 +123,11 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
   };
 
   return (
-    <div className="w-full max-w-[1053px] py-[160px] px-[200px] registerForm mx-auto">
+    <div
+      className={`w-full max-w-[1053px] py-[160px] px-[200px] registerForm mx-auto ${
+        isViewDetails ? "pointer-events-none" : ""
+      }`}
+    >
       <div className="formRow mb-[67px]">
         <div className="w-full">
           <label htmlFor="firstName" className="labelText">
@@ -226,20 +239,28 @@ const RegistrationForm = ({ data, closeOnSubmit }) => {
         </div>
       </div>
 
-      <div className="formRow">
-        <button
-          className="text-center bg-[#E3E3E3] rounded-[13px] btnText h-[69px] w-[297px]"
-          onClick={handleCancelForm}
-        >
-          Cancel
-        </button>
-        <button
-          className="text-center bg-white border-[2px] border-solid border-[#142A51] rounded-[13px] btnText h-[69px] w-[297px]"
-          onClick={handleSubmit}
-        >
-          Save
-        </button>
+      <div className={`formRow ${!isViewDetails ? "mb-[100px]" : ""}`}>
+        <div className="w-full">
+          <CustomRichText value={desc} setValue={(inp) => setDesc(inp)} />
+        </div>
       </div>
+
+      {!isViewDetails && (
+        <div className="formRow">
+          <button
+            className="text-center bg-[#E3E3E3] rounded-[13px] btnText h-[69px] w-[297px]"
+            onClick={handleCancelForm}
+          >
+            Cancel
+          </button>
+          <button
+            className="text-center bg-white border-[2px] border-solid border-[#142A51] rounded-[13px] btnText h-[69px] w-[297px]"
+            onClick={handleSubmit}
+          >
+            Save
+          </button>
+        </div>
+      )}
     </div>
   );
 };

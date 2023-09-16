@@ -1,16 +1,16 @@
 "use client";
-import "./RegistrationPage.css";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog } from "@mui/material";
+import "./RegistrationPage.css";
 import React from "react";
 import RegistrationForm from "./RegistrationForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const EditDetailsPage = ({ open, handleClose, data }) => {
+const ViewDetailsPage = ({ open, handleClose, employee }) => {
   return (
     <div>
       <Dialog fullScreen open={open} onClose={handleClose}>
-        <div className="bg-white w-full h-full ">
+        <div className="bg-white w-full h-full">
           <FontAwesomeIcon
             icon={faXmark}
             size="2xl"
@@ -19,14 +19,18 @@ const EditDetailsPage = ({ open, handleClose, data }) => {
             className="mt-5 px-6 cursor-pointer"
           />
           <p className="w-full text-center registerFormTitle my-20">
-            Edit Employee Details
+            Employee Details
           </p>
 
-          <RegistrationForm data={data} closeOnSubmit={handleClose} />
+          <RegistrationForm
+            isViewDetails={true}
+            closeOnSubmit={handleClose}
+            data={employee}
+          />
         </div>
       </Dialog>
     </div>
   );
 };
 
-export default EditDetailsPage;
+export default ViewDetailsPage;

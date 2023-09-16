@@ -12,10 +12,12 @@ import {
 import { AppContext } from "@/app/AppContext";
 import axios from "axios";
 import EditDetailsPage from "../EditDetailsPage";
+import ViewDetailsPage from "../ViewDetailsPage";
 
 const EmployeeCard = ({ employee }) => {
   const [clicked, setClicked] = useState(false);
   const [openEditForm, setOpenEditForm] = useState(false);
+  const [openViewDetails, setOpenViewDetails] = useState(false);
   const { fetchEmployeeData } = useContext(AppContext);
 
   const handleDeleteEmployee = async () => {
@@ -31,7 +33,7 @@ const EmployeeCard = ({ employee }) => {
       if (error.response && error.response.status === 500) {
         alert("Internal Server Error:", error);
       } else {
-        alert("Request Error:", error);
+        console.log("Request Error:", error);
       }
     }
   };
@@ -52,7 +54,10 @@ const EmployeeCard = ({ employee }) => {
       <p className="employeeCardText ">{employee.DOB}</p>
       <p className="employeeCardText ">{employee.StartDate}</p>
       <p className="employeeCardText ">{employee.EndDate}</p>
-      <p className="employeeCardText  col-span-2">{employee.Description}</p>
+      <div
+        className="employeeCardText  col-span-2"
+        dangerouslySetInnerHTML={{ __html: employee.Description }}
+      />
 
       <div
         className="absolute right-7 top-1/2 -translate-y-1/2 cursor-pointer"
@@ -64,7 +69,10 @@ const EmployeeCard = ({ employee }) => {
       {clicked ? (
         <ClickAwayListener onClickAway={handleClickAway}>
           <div className="absolute right-4 bottom-2 bg-white text-[] rounded-lg flex flex-col">
-            <div className="cursor-pointer flex items-center gap-4 px-6 py-4">
+            <div
+              className="cursor-pointer flex items-center gap-4 px-6 py-4"
+              onClick={() => setOpenViewDetails(true)}
+            >
               <FontAwesomeIcon icon={faEye} size="sm" color="#7D7D7D" />
               <p className="popupText">View</p>
             </div>
@@ -90,6 +98,12 @@ const EmployeeCard = ({ employee }) => {
         open={openEditForm}
         handleClose={() => setOpenEditForm(false)}
         data={employee}
+      />
+
+      <ViewDetailsPage
+        open={openViewDetails}
+        handleClose={() => setOpenViewDetails(false)}
+        employee={employee}
       />
     </div>
   );
