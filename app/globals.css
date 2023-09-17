@@ -47,7 +47,7 @@ body {
 }
 
 .optionCard {
-  @apply px-6 py-4 text-lg cursor-pointer hover:bg-white/[0.04] transition-all ease-in-out;
+  @apply px-6 py-4 text-lg cursor-pointer border-b-[1px] border-solid border-white/[0.05] hover:bg-white/[0.04] transition-all ease-in-out;
 }
 .searchBarText {
   color: #556e9a;
