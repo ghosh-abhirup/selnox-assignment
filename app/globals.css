@@ -8,6 +8,12 @@ body {
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  color: white;
+}
+
 .registerBtnText {
   color: #fff;
   font-size: 18px;
@@ -31,4 +37,22 @@ body {
 
 .formRow {
   @apply flex items-center justify-between gap-[50px];
+}
+
+.searchInputBox {
+  @apply outline-none rounded-[16px] bg-[#f8fbff] w-full h-[57px] px-4 cursor-pointer;
+}
+.searchOptions {
+  @apply absolute overflow-y-auto top-full mt-2 w-full max-h-60 bg-[#142A51] text-white rounded-[12px] z-10 shadow-lg;
+}
+
+.optionCard {
+  @apply px-6 py-4 text-lg cursor-pointer hover:bg-white/[0.04] transition-all ease-in-out;
+}
+.searchBarText {
+  color: #556e9a;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 140%; /* 18.2px */
+  letter-spacing: 0.13px;
 }

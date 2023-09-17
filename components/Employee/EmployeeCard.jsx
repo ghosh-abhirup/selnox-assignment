@@ -49,7 +49,7 @@ const EmployeeCard = ({ employee }) => {
   return (
     <div className="relative employeeCard border-b-[1px] border-solid border-other_grey">
       <p className="employeeCardText ">
-        {employee.FirstName + " " + employee.LastName}
+        {employee.FirstName.trim() + " " + employee.LastName.trim()}
       </p>
       <p className="employeeCardText ">{employee.DOB}</p>
       <p className="employeeCardText ">{employee.StartDate}</p>
