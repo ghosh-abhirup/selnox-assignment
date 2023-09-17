@@ -8,12 +8,6 @@ body {
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  color: white;
-}
-
 .registerBtnText {
   color: #fff;
   font-size: 18px;
@@ -46,8 +40,25 @@ body {
   @apply absolute overflow-y-auto top-full mt-2 w-full max-h-60 bg-[#142A51] text-white rounded-[12px] z-10 shadow-lg;
 }
 
+.searchOptions::-webkit-scrollbar {
+  width: 3px;
+  height: 10px;
+  border-radius: 2px;
+}
+.searchOptions::-webkit-scrollbar-thumb {
+  color: #556e9a;
+}
+
 .optionCard {
-  @apply px-6 py-4 text-lg cursor-pointer border-b-[1px] border-solid border-white/[0.05] hover:bg-white/[0.04] transition-all ease-in-out;
+  @apply px-6 py-4 cursor-pointer border-b-[1px] border-solid border-white/[0.05] hover:bg-white/[0.04] transition-all ease-in-out;
+}
+.optionCardText {
+  color: #dae2ef;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 18.2px */
 }
 .searchBarText {
   color: #556e9a;

@@ -66,7 +66,7 @@ export default function Home() {
                         <Combobox.Option
                           key={employee.id}
                           value={fullName}
-                          className={`optionCard`}
+                          className={`optionCard optionCardText`}
                           onClick={() => {
                             setSelectedEmplyee(employee);
                             setOpenView(true);
